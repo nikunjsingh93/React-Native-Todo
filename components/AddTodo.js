@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet,  Button, TextInput, View } from 'react-native';
+import firebase from 'react-native-firebase'
 
 export default class AddTodo extends React.Component {
     state = {
@@ -11,7 +12,19 @@ export default class AddTodo extends React.Component {
  onSubmit = (e) => {
      e.preventDefault();
      this.props.addTodo(this.state.title);
-     this.setState({ title: '' })
+     
+
+     firebase.database().ref('UsersList/').child(userUid).push({
+      Task: this.state.title
+     }).then((data)=>{
+      //success callback
+      console.log('data ' , data)
+  }).catch((error)=>{
+      //error callback
+      console.log('error ' , error)
+  })
+
+  this.setState({ title: '' })
  }
 
 
@@ -33,6 +46,8 @@ export default class AddTodo extends React.Component {
       )
   }
 }
+
+const userUid = firebase.auth().currentUser.uid;
 
 const styles = StyleSheet.create({
   container: {
