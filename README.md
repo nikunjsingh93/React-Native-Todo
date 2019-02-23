@@ -1,6 +1,8 @@
 # React Native Todo
 Sync your Todo tasks on the cloud. React Native for the front end and Firebase on the back end.
 
+Google Play Store Link: https://play.google.com/store/apps/details?id=com.react_native_todo_nik
+
 # Screenshots
 
 ![screenshot_20190222-203043_just a simple todo 2](https://user-images.githubusercontent.com/31995471/53291291-df1ae700-377e-11e9-9468-4f7b5af538bb.jpg)
