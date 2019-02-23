@@ -12,10 +12,14 @@ export default class AddTodo extends React.Component {
  onSubmit = (e) => {
      e.preventDefault();
      this.props.addTodo(this.state.title);
+
+     const userUid = firebase.auth().currentUser.uid;
      
 
-     firebase.database().ref('UsersList/').child(userUid).push({
-      Task: this.state.title
+     firebase.database().ref('UsersList/').child(userUid).child('AllTasks/').push({
+      Task: this.state.title,
+      
+     // Completed: false
      }).then((data)=>{
       //success callback
       console.log('data ' , data)
@@ -23,37 +27,42 @@ export default class AddTodo extends React.Component {
       //error callback
       console.log('error ' , error)
   })
+  
 
   this.setState({ title: '' })
+  this.textInput.clear()
  }
 
 
   render() {
     return (
-        <View>
+        <View style={styles.container}>
          
             <TextInput style={{height: 80, borderColor: 'gray', borderWidth: 1}}
             editable = {true}
             maxLength = {40}
             placeholder='Add Todo...'   
+            ref={input => { this.textInput = input }}
             onChangeText={(title) => this.setState({title})}
              />  
   
-             <Button 
-             title='Submit' onPress={this.onSubmit}
+             <Button  color="#00ADB5"
+             title='Add it!' onPress={this.onSubmit}
               />
         </View>
       )
   }
 }
 
-const userUid = firebase.auth().currentUser.uid;
+
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  //  flex: 1,
+    marginTop: 8,
+    marginBottom: 8
+    
+   // alignItems: 'center',
+   // justifyContent: 'center',
   },
 });

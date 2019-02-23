@@ -12,16 +12,24 @@ export default class TodoItem extends React.Component {
     }
  }
 
+//  getStyle = () => {
+//   return {
+      
+//       textDecoration: this.props.todo.completed ? 'line-through' : 'none'
+//   }
+// }
+
 
   render() {
     const { id, title } = this.props.todo;
     return (
-      <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+      <View style={{flex: 1, flexDirection: 'row', padding: 10, backgroundColor: '#fff'}}>
        
-     <CheckBox 
-      value={this.state.checked}
+     {/* <CheckBox style={this.getStyle()}
+     value={this.state.checked}
       onValueChange={() => this.setState({ checked: !this.state.checked })}
-    />
+    onChange={this.props.markComplete.bind(this, id)}
+    /> */}
 
         <Text>{title}</Text>
         <View style={styles.container}>
